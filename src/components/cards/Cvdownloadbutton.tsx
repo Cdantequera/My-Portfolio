@@ -65,8 +65,8 @@ export const CVDownloadButton = () => {
 
   return (
     <a
-      href={state === 'idle' || state === 'downloading' ? '/cv-daniel-antequera.pdf' : undefined}
-      download={state === 'idle' || state === 'downloading' ? 'CV-Daniel-Antequera.pdf' : undefined}
+      href={state === 'idle' || state === 'downloading' ? '/cv_daniel_antequera.pdf' : undefined}
+      download={state === 'idle' || state === 'downloading' ? 'CV_Daniel_Antequera.pdf' : undefined}
       onClick={handleDownload}
       aria-label="Descargar CV de Daniel Antequera"
       className={`
