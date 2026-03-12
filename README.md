@@ -1,73 +1,137 @@
-# React + TypeScript + Vite
+# 🌐 Portfolio — Daniel Antequera
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Full Stack Developer · Freelance**  
+> Tucumán, Argentina · [cdantequera@gmail.com](mailto:cdantequera@gmail.com) · [LinkedIn](https://www.linkedin.com/in/cdantequera) · [GitHub](https://github.com/cdantequera)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Vista previa
 
-## React Compiler
+Portfolio personal construido con animaciones basadas en scroll, diseño oscuro y arquitectura de componentes modular. Cada sección está pensada para comunicar no solo qué tecnologías uso, sino cómo pienso y resuelvo problemas.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Categoría | Tecnologías |
+|---|---|
+| Frontend | React 19, TypeScript, Vite 7 |
+| Estilos | Tailwind CSS 4 |
+| Animaciones | Framer Motion 12 |
+| Iconos | React Icons 5 |
+| Deploy | Vercel |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📁 Estructura del proyecto
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/
+│   ├── hero/           # Sección inicial con animación de letras dispersas
+│   ├── navbar/         # Navegación fija con detección de scroll
+│   ├── about/          # Sobre mí con letras ensamblables y skill bars
+│   ├── experience/     # Colaboraciones freelance con caso de estudio expandible
+│   ├── projects/       # Proyectos personales con caso de estudio interactivo
+│   ├── contact/        # Links de contacto + botón de descarga de CV
+│   ├── cards/
+│   │   ├── ProjectCard.tsx       # Tarjeta reutilizable de proyecto
+│   │   └── CVDownloadButton.tsx  # Botón de descarga con rate limit por sesión
+│   └── logo/
+│       └── Logo.tsx    # Logo SVG personalizado con filtros de glow
+├── App.tsx
+└── main.tsx
+
+public/
+└── cv-daniel-antequera.pdf   # CV descargable
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Instalación y uso
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clonar el repositorio
+git clone https://github.com/cdantequera/portfolio-cdantequera.git
+cd portfolio-cdantequera
+
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
+npm run dev
+
+# Build de producción
+npm run build
+
+# Preview del build
+npm run preview
 ```
+
+---
+
+## 🎨 Secciones
+
+### Hero
+Presentación con nombre animado: cada letra explota al hacer scroll y se dispersa en distintas direcciones con rotaciones y opacidades calculadas de forma determinista por índice.
+
+### Sobre Mí
+Título con efecto de ensamblaje/desintegración controlado por `useScroll` + `useTransform` de Framer Motion. Las letras entran desde distintas posiciones al entrar al viewport y salen por el lado opuesto al hacer scroll.
+
+### Proyectos & Colaboraciones
+Dos secciones diferenciadas:
+- **Experience:** trabajos freelance reales (APPWise, Izipay) con caso de estudio expandible en 3 tabs (Contexto / Lo que aprendí / El valor)
+- **Projects:** proyectos personales con caso de estudio interactivo mostrando el proceso de pensamiento: Problema → Decisiones técnicas → Resultado
+
+### Contacto
+Grid de links con efecto glow al hover + botón de descarga de CV con feedback visual de estados (`idle → downloading → done`).
+
+---
+
+## 🔒 Protección del CV
+
+La descarga del CV tiene dos capas de protección:
+
+**Cliente:** El componente `CVDownloadButton` limita a 3 descargas por sesión de navegador para disuadir el abuso casual.
+
+**CDN:** Configurado en `vercel.json` para cachear el PDF 24 horas en el edge de Vercel, absorbiendo cualquier intento de abuso antes de que llegue al servidor.
+
+```json
+// vercel.json
+{
+  "headers": [
+    {
+      "source": "/cv-daniel-antequera.pdf",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=3600" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+## 📦 Scripts disponibles
+
+```bash
+npm run dev          # Servidor de desarrollo con HMR
+npm run build        # Build de producción (TypeScript + Vite)
+npm run preview      # Preview del build de producción
+npm run lint         # ESLint
+npm run format       # Prettier (escribe cambios)
+npm run format:check # Prettier (solo verifica)
+```
+
+---
+
+## 📄 Licencia
+
+Este proyecto es de uso personal. El código puede usarse como referencia o inspiración, pero el contenido (nombre, foto, proyectos, datos de contacto) pertenece a Daniel Antequera.
+
+---
+
+<div align="center">
+  <sub>Hecho con ☕ en Tucumán, Argentina</sub>
+</div>
