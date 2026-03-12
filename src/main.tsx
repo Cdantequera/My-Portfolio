@@ -1,0 +1,14 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
+import { ParallaxProvider } from 'react-scroll-parallax'
+
+// Envolvemos toda la app con el ParallaxProvider para poder usar el efecto en cualquier componente
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <ParallaxProvider>
+      <App />
+    </ParallaxProvider>
+  </React.StrictMode>,
+)
