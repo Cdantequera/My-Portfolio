@@ -130,8 +130,5 @@ npm run format:check # Prettier (solo verifica)
 
 Este proyecto es de uso personal. El código puede usarse como referencia o inspiración, pero el contenido (nombre, foto, proyectos, datos de contacto) pertenece a Daniel Antequera.
 
----
 
-<div align="center">
-  <sub>Hecho con ☕ en Tucumán, Argentina</sub>
 </div>
