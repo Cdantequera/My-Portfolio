@@ -25,7 +25,7 @@ const contactLinks = [
     icon: FiGithub,
     label: 'GitHub',
     value: 'Cdantequera',
-    href: 'https://github.com/Cdantequera',
+    href: 'https://github.com/cdantequera',
     color: 'from-slate-400 to-zinc-300',
     glow: 'rgba(148,163,184,0.3)',
   },
